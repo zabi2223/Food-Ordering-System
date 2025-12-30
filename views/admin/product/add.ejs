@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/admin-style.css" />
+</head>
+<body>
+  <header>
+    <h1 style="text-align: center;">Add Product</h1>
+    <a href="/admin/product/index" class="back-home">← Back</a>
+  </header>
+  <main>
+
+  <div class="container">
+    <form action="/admin/product/add" method="POST" enctype="multipart/form-data">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" required />
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <label for="image">Product Image</label>
+      <input type="file" id="image" name="image" accept="image/*" />
+
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+
+</main>
+  <% if (message) { %>
+    <div id="success-message" class="alert">
+      <%= message %>
+    </div>
+  <% } %>
+
+
+<script src="/javascript/scripts.js"></script>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Burger King Admin Panel. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

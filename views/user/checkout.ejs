@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/user-style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Burger King</div>
+    <nav class="nav-links">
+      <a href="/user">Home</a>
+      <a href="/user/product" class="active">Products</a>
+      <a href="/user/about">About</a>
+      <a href="/user/cart"><span class="cart-icon">🛒</span></a>
+      <% if (user) { %> <!-- If user is logged in -->
+        <img class="profile-icon" src="/images/icon.png" alt="profile" id="profile-icon" />
+
+        <div class="dropdown-menu" id="dropdown-menu">
+          <ul>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
+        
+      <% } else { %> <!-- If user is not logged in -->
+        <a href="/user/login" class="login-icon">
+          <img src="/images/login.png" alt="login" />
+        </a>
+      <% } %>
+    </nav>
+  </header>
+<section class="hero">
+  <div class="order-form-container">
+    <h2>Place Your Order</h2>
+    <form action="/user/place-order" method="POST" class="order-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name" />
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile No.</label>
+        <input type="tel" id="mobile" name="mobile" required placeholder="03XX-XXXXXXX" pattern="03[0-9]{2}-[0-9]{7}" />
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" required placeholder="Enter your delivery address"></textarea>
+      </div>
+      <button type="submit" class="btn-order">Place Order</button>
+    </form>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h1 style="color: #ff6347; letter-spacing: 2px; margin-top: 20px;">Burger King</h1>
+        <p>We deliver happiness in the form of Burger!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/user">Home</a></li>
+          <li><a href="/user/product">Products</a></li>
+          <li><a href="/user/about">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: support@BurgerKing.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Burger King. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <% if (message) { %>
+    <div id="success-message" class="alert">
+      <%= message %>
+    </div>
+  <% } %>
+
+  <script src="/javascript/scripts.js"></script>
+</body>
+</html>

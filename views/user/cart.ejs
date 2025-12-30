@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/user-style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Burger King</div>
+    <nav class="nav-links">
+        <a href="/user">Home</a>
+        <a href="/user/product">Products</a>
+        <a href="/user/about">About</a>
+        <a href="/user/cart"><span class="cart-icon">🛒</span></a>
+          <img class="profile-icon" src="/images/icon.png" alt="profile" id="profile-icon" />
+  
+          <div class="dropdown-menu" id="dropdown-menu">
+            <ul>
+              <li><a href="/user/profile">Profile</a></li>
+              <li><a href="/user/logout">Logout</a></li>
+            </ul>
+          </div>
+      </nav>
+  </header>
+  <section class="hero">
+  <!-- Cart Section -->
+<h1>Your <span class="highlight">Cart</span></h1>
+
+<% if (cart.length === 0) { %>
+  <p>No products added to the cart.</p>
+<% } else { %>
+  <div class="cart-table">
+    <div class="cart-row header">
+      <div>Name</div>
+      <div>Price (RS)</div>
+      <div>Quantity</div>
+      <div>Total</div>
+      <div>Delete</div>
+    </div>
+    
+    <% cart.forEach(cart => { %>
+      <div class="cart-row">
+        <div><%= cart.name %></div>
+        <div><%= cart.price %></div>
+        <div><%= cart.quantity %></div>
+        <div><%= cart.price * cart.quantity %></div>
+        <div>
+          <a href="/user/cart/delete/<%= cart._id %>" class="delete-link" onclick="return confirm('Are you sure?')">Delete</a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <% } %>
+
+   <% if (cart.length > 0) { %>
+  <div class="cart-summary">
+    <h3>Grand Total: <span id="total-price"><%= total %></span> Rs</h3>
+    <br>
+      <a class="btn-order" href="/user/checkout">Proceed to Checkout</a>
+  </div>
+<% } %>
+
+    </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h1 style="color: #ff6347; letter-spacing: 2px; margin-top: 20px;">Burger King</h1>
+        <p>We deliver happiness in the form of Burger!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+            <li><a href="/user">Home</a></li>
+            <li><a href="/user/product">Products</a></li>
+            <li><a href="/user/about">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: support@BurgerKing.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Burger King. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="/javascript/scripts.js"></script>
+</body>
+</html>

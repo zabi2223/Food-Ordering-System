@@ -1,0 +1,380 @@
+/* Basic styling for the admin page */
+  html, body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+  }
+  header {
+    background-color: #333;
+    color: white;
+    padding: 0;
+    font-size: 18px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .admin-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto;
+    flex-wrap: wrap; /* allows them to wrap on smaller screens */
+  }
+  
+  .admin-link {
+    padding: 20px 40px;
+    background-color: #ff6347;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-link:hover {
+    background-color: #e5533d;
+  }
+  
+  .back-home {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-home:hover {
+    background-color: #434242;
+  }
+  
+  /* Form Container */
+.container form {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Form Labels */
+  .container form label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  /* Form Inputs */
+  .container form input[type="text"],
+  .container form input[type="number"],
+  .container form textarea {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 95%;
+    resize: vertical;
+  }
+  
+  /* Submit Button */
+  .container form button[type="submit"] {
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .container form button[type="submit"]:hover {
+    background-color: #218838;
+  }
+
+  
+  /* Responsive container */
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  /* File Input Styling */
+.container form input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+
+  /* Footer */
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 70px;
+  }
+  
+  .footer-content p {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  
+  .alert {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  th {
+    background-color: #ff6347;
+    color: white;
+  }
+
+  img {
+    max-width: 100px;
+    height: auto;
+  }
+
+  .action-btn {
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    margin-right: 10px;
+  }
+
+  .edit-btn {
+    background-color: #4caf50;
+  }
+
+  .delete-btn {
+    background-color: #f44336;
+  }
+
+  main {
+    flex: 1;
+  }
+
+  
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 10px;
+
+}
+
+.dropdown-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 10px;
+}
+
+.dropdown-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+/* Style for hover effect */
+.dropdown-menu ul li a:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+.profile-section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Profile Info */
+.profile-info {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.profile-info h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Change Password Section */
+.change-password {
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 25px 30px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.change-password h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+/* Form Styling */
+.update-form .form-group {
+  margin-bottom: 10px;
+}
+
+.update-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+.update-form input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.update-form input[type="password"]:focus {
+  border-color: #e5533c;
+  outline: none;
+}
+
+/* Submit Button */
+.update-form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #e86d5a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-form button[type="submit"]:hover {
+  background-color: #e5533c;
+}
+/* Add this CSS to style the modal properly */
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+
+.print-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

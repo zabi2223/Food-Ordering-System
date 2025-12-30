@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/admin-style.css" />
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align:center;">All Users</h1>
+        <a href="/admin" class="back-home">← Back</a>
+    </header>
+<main>
+
+    <% if (users.length === 0) { %>
+        <p>No user found in the database.</p>
+      <% } else { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Change Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+              <% if (user.email !== 'zohaibtariq183@gmail.com') { %>
+                <% if (user.status === 'Active') { %>
+                  <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.status %></td>
+                    <td>
+                      <a href="/admin/user/status/<%= user._id %>" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">Block</a>
+                    </td>
+                  </tr>
+                <% } else if (user.status === 'Block') { %>
+                  <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.status %></td>
+                    <td>
+                      <a href="/admin/user/status/<%= user._id %>" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">Un-Block</a>
+                    </td>
+                  </tr>
+                <% } %>
+              <% } %>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>      
+</main>
+</body>
+<footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Burger King Admin Panel. All rights reserved.</p>
+    </div>
+  </footer>
+
+</html>

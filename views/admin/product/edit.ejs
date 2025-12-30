@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/admin-style.css" />
+</head>
+<body>
+  <header>
+    <h1 style="text-align: center;">Update Product</h1>
+    <a href="/admin/product/view" class="back-home">← Back</a>
+  </header>
+  <main>
+
+  <div class="container">
+    <form action="/admin/product/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+      <label for="name">Name</label>
+      <input type="text" value="<%= product.name %>" id="name" name="name" required >
+
+      <label for="price">Price</label>
+      <input type="number" value="<%= product.price %>" id="price" name="price" required >
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required><%= product.description %></textarea>
+
+      <label for="image">Product Image</label>
+      <img src="data:<%= product.imagetype %>;base64,<%= product.image %>" alt="<%= product.name %>" style="max-width: 100px;">
+      <input type="file" id="image" name="image" accept="image/*" >
+
+      <button type="submit">Update Product</button>
+    </form>
+  </div>
+  </main>
+  <% if (message) { %>
+    <div id="success-message" class="alert">
+      <%= message %>
+    </div>
+  <% } %>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Burger King Admin Panel. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script src="/javascript/scripts.js"></script>
+</body>
+</html>

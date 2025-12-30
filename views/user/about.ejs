@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/user-style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Burger King</div>
+    <nav class="nav-links">
+      <a href="/user">Home</a>
+      <a href="/user/product">Products</a>
+      <a href="/user/about" class="active">About</a>
+      <a href="/user/cart"><span class="cart-icon">🛒</span></a>
+      <% if (user) { %> <!-- If user is logged in -->
+        <img class="profile-icon" src="/images/icon.png" alt="profile" id="profile-icon" />
+
+        <div class="dropdown-menu" id="dropdown-menu">
+          <ul>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
+        
+      <% } else { %> <!-- If user is not logged in -->
+        <a href="/user/login" class="login-icon">
+          <img src="/images/login.png" alt="login" />
+        </a>
+      <% } %>
+    </nav>
+  </header>
+  <section class="hero">
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-container">
+      <h1>About <span class="highlight">Burger King</span></h1>
+      <p>At Burger King, we believe Burger is more than just fuel — it's an experience. Founded in 2025, our mission is to connect hungry customers with Burger King.</p>
+      
+      <div class="about-highlights">
+        <div class="highlight-box">
+          <h3>Our Mission</h3>
+          <p>Deliver happiness with every bite through top-tier service and food quality.</p>
+        </div>
+        <div class="highlight-box">
+          <h3>Our Vision</h3>
+          <p>Become the most loved Burger delivery platform globally, one order at a time.</p>
+        </div>
+        <div class="highlight-box">
+          <h3>Why Choose Us</h3>
+          <p>Unmatched variety, unbeatable taste, and unwavering quality — that’s the Burger King promise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h1 style="color: #ff6347; letter-spacing: 2px; margin-top: 20px;">Burger King</h1>
+        <p>We deliver happiness in the form of Burger!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/user">Home</a></li>
+          <li><a href="/user/product">Products</a></li>
+          <li><a href="/user/about">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: support@BurgerKing.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Burger King. All rights reserved.</p>
+    </div>
+  </footer>
+  <% if (message) { %>
+    <div id="success-message" class="alert">
+      <%= message %>
+    </div>
+  <% } %>
+  <script src="/javascript/scripts.js"></script>
+</body>
+</html>

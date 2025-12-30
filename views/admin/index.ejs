@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/admin-style.css" />
+</head>
+<body>
+  <header> 
+    <h1 style="text-align: center;">Admin Dashboard</h1>
+    <img class="profile-icon" src="/images/icon.png" alt="profile" id="profile-icon" />
+
+    <div class="dropdown-menu" id="dropdown-menu">
+      <ul>
+        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="/admin/logout">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+<main>
+  <div class="container">
+    <h2>Welcome, Admin!</h2>
+    <div class="admin-links">
+      <a href="/admin/product/index" class="admin-link">Manage Products</a>
+      <a href="/admin/users/view" class="admin-link">Manage Users</a>
+      <a href="/admin/order/index" class="admin-link">Manage Orders</a>
+    </div>
+  </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Burger King Admin Panel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/javascript/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burger King</title>
+  <link rel="stylesheet" href="/stylesheet/admin-style.css" />
+</head>
+<body>
+
+  <header>
+    <h1 style="text-align: center;">Manage Orders</h1>
+    <a href="/admin" class="back-home">← Back</a>
+  </header>
+<main>
+  <section class="container">
+    <h2 style="text-align: center;">Orders</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>Username</th>
+          <th>View</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (orders.length === 0) { %>
+          <tr>
+            <td colspan="5">No orders found.</td>
+          </tr>
+        <% } else { %>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td><%= new Date(order.createdAt).toISOString().slice(0,10) %></td>
+              <td><%= order.userId.name %></td>
+              <td>
+                <a href="#" 
+                class="action-btn edit-btn view-receipt-btn"
+                data-id="<%= order._id %>"
+                data-username="<%= order.userId.name %>"
+                data-date="<%= new Date(order.createdAt).toISOString().slice(0,10) %>"
+                data-total="<%= order.totalAmount %>"
+                data-mobile="<%= order.mobile %>"
+                data-address="<%= order.address %>"
+                data-items='<%- JSON.stringify(order.items) %>'>
+                View
+              </a>
+              </td>
+              <td><%= order.status || "Pending" %></td>
+              <td>
+                <% if (order.status === "Pending") { %>
+                  <a href="/admin/order/approve/<%= order._id %>" class="action-btn edit-btn">
+                    Approve
+                  </a>
+                  <a href="/admin/order/reject/<%= order._id %>" class="action-btn delete-btn">
+                    Reject
+                  </a>
+                <% } else { %>
+                  <span style="color: green;">Approved</span>
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </section>
+
+  <div id="receipt-modal" class="modal" style="display: none;">
+  <div class="modal-content" id="receipt-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div id="receipt-body">
+      <!-- Receipt content will be injected here -->
+    </div>
+    <button onclick="printReceipt()" class="print-btn">Print</button>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Burger King Admin Panel. All rights reserved.</p>
+    </div>
+  </footer>
+  <% if (message) { %>
+    <div id="success-message" class="alert">
+      <%= message %>
+    </div>
+  <% } %>
+
+
+<script>
+setTimeout(function () {
+    const msg = document.getElementById("success-message");
+    if (msg) {
+      msg.style.opacity = "0";
+      setTimeout(() => {
+        msg.remove();
+        if (window.history.replaceState) {
+          const cleanURL = window.location.origin + window.location.pathname;
+          window.history.replaceState(null, null, cleanURL);
+        }
+      }, 500);
+    }
+  }, 2000);
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const viewButtons = document.querySelectorAll(".view-receipt-btn");
+    const modal = document.getElementById("receipt-modal");
+    const receiptBody = document.getElementById("receipt-body");
+
+    if (viewButtons.length > 0 && modal && receiptBody) {
+      viewButtons.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const username = this.dataset.username;
+          const date = this.dataset.date;
+          const total = this.dataset.total;
+          const mobile = this.dataset.mobile;
+          const address = this.dataset.address;
+          const items = JSON.parse(this.dataset.items);
+
+          let itemsHtml = '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
+          itemsHtml += '<tr><th style="text-align: left;">Item</th><th>Qty</th><th>Price</th></tr>';
+
+          items.forEach(item => {
+            itemsHtml += `<tr>
+                            <td>${item.name}</td>
+                            <td style="text-align:center;">${item.quantity}</td>
+                            <td>Rs. ${item.price}</td>
+                          </tr>`;
+          });
+
+          itemsHtml += '</table>';
+
+          const receiptHtml = `
+            <h2 style="text-align: center;">Burger King Receipt</h2>
+            <p><strong>Name:</strong> ${username}</p>
+            <p><strong>Mobile:</strong> ${mobile}</p>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Date:</strong> ${date}</p>
+            ${itemsHtml}
+            <p><strong>Total:</strong> Rs. ${total}</p>
+          `;
+
+          receiptBody.innerHTML = receiptHtml;
+          modal.style.display = "flex";
+        });
+      });
+    }
+  });
+
+  function closeModal() {
+    const modal = document.getElementById("receipt-modal");
+    if (modal) modal.style.display = "none";
+  }
+
+  function printReceipt() {
+    const printContent = document.getElementById("receipt-body").innerHTML;
+    const win = window.open('', '', 'height=700,width=700');
+    win.document.write('<html><head><title>Print Receipt</title></head><body>');
+    win.document.write(printContent);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
+  }
+
+  window.closeModal = closeModal;
+  window.printReceipt = printReceipt;
+</script>
+
+</body>
+</html>
