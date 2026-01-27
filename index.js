@@ -3,12 +3,20 @@ import session from 'express-session';
 import user from "./routes/userRoute.js";
 import admin from "./routes/adminRoute.js";
 import connectToDB from "./db config/db.js";
+import dotenv from "dotenv";
+import morgan from "morgan";
+import helmet from "helmet";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger/swagger.js";
 
+dotenv.config();
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(morgan("dev"));
+app.use(helmet());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
@@ -24,6 +32,8 @@ app.use(session({
 }));
 
 connectToDB();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/user', (req, res, next) => {
   res.locals.user = req.session.user || null;

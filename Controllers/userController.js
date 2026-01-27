@@ -3,6 +3,8 @@ import Cart from "../models/cart.js";
 import User from "../models/user.js";
 import Order from "../models/order.js";
 import bcrypt from "bcryptjs";
+import xss from "xss";
+import { signupValidation, loginValidation } from "../DataValidation/validation.js";
 
 /* ==================== User ==================== */
 
@@ -133,35 +135,56 @@ export const signupPage = async (req, res) => {
 
 export const signupUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const result = signupValidation.safeParse(req.body);
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.redirect("/signup?message=Email+already+registered");
+        if (!result.success) {
+            const errorMessages = result.error.errors.map(err => err.message).join(", ");
+            return res.redirect(`/signup?message=${encodeURIComponent(errorMessages)}`);
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword, status: "Active" });
+        const { name, email, password } = result.data;
+
+        const cleanName = xss(name);
+        const cleanEmail = xss(email);
+        const cleanPassword = xss(password);
+
+        const existingUser = await User.findOne({ cleanEmail });
+        if (existingUser) {
+            return res.redirect("/user/signup?message=Email+already+registered");
+        }
+
+        const hashedPassword = await bcrypt.hash(cleanPassword, 10);
+        const newUser = new User({ name: cleanName, email: cleanEmail, password: hashedPassword, status: "Active" });
 
         await newUser.save();
-        res.redirect("/login?message=Account+created+successfully");
+        res.redirect("/user/login?message=Account+created+successfully");
     } catch (error) {
         res.status(500).send("Internal Server Error");
     }
 };
 
 export const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-
     try {
-        const user = await User.findOne({ email });
+        const result = loginValidation.safeParse(req.body);
+
+        if (!result.success) {
+            const errorMessages = result.error.errors.map(err => err.message).join(", ");
+            return res.redirect("/?message=" + encodeURIComponent(errorMessages));
+        }
+
+        const { email, password } = result.data;
+
+        const cleanEmail = xss(email);
+        const cleanPassword = xss(password);
+
+        const user = await User.findOne({ cleanEmail });
         if (!user) return res.render("login", { message: "User not found" });
         if (user.status === "Block") return res.render("login", { message: "User Blocked" });
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(cleanPassword, user.password);
         if (!isMatch) return res.render("login", { message: "Incorrect password" });
 
-        if (email === "zohaibtariq183@gmail.com") {
+        if (user.email === "admin@gmail.com") {
             req.session.admin = user;
             return res.redirect("/admin");
         }

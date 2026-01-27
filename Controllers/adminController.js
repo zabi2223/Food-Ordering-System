@@ -1,6 +1,8 @@
 import Product from "../models/product.js";
 import Order from "../models/order.js";
 import User from "../models/user.js";
+import xss from "xss";
+import { productValidation } from "../DataValidation/validation.js";
 
 /* ==================== Admin ==================== */
 
@@ -12,7 +14,7 @@ export const adminLogout = (req, res) => {
     if (req.session.admin) {
         delete req.session.admin;
     }
-    res.redirect("/login?message=Logged+out+successfully");
+    res.redirect("/user/login?message=Logged+out+successfully");
 };
 
 /* ==================== Manage Product ==================== */
@@ -27,7 +29,25 @@ export const productAddPage = async (req, res) => {
 };
 
 export const productAdd = async (req, res) => {
-    const { name, price, description } = req.body;
+    const result = productValidation.safeParse(req.body);
+
+    if (!result.success) {
+        const errorMessages = result.error.errors.map(err => err.message).join(", ");
+        return res.redirect(`/admin/product/add?message=${encodeURIComponent(errorMessages)}`);
+    }
+
+    const { name, price, description } = result.data;
+
+
+    const cleanName = xss(name);
+    const cleanPrice = xss(price);
+    const cleanDescription = xss(description);
+
+    const existingProduct = await Product.findOne({ cleanName });
+    if (existingProduct) {
+        return res.redirect("/admin/product/add?message=Product+already+exist");
+    }
+
     const file_image = req.file;
 
     if (!file_image) {
@@ -38,9 +58,9 @@ export const productAdd = async (req, res) => {
     const imageType = file_image.mimetype;
 
     const newproduct = new Product({
-        name,
-        price,
-        description,
+        name: cleanName,
+        price: cleanPrice,
+        description: cleanDescription,
         image: imageBase64,
         imagetype: imageType
     });
@@ -106,12 +126,16 @@ export const productEdit = async (req, res) => {
 
 export const usersView = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find({
+            email: { $ne: "admin@gmail.com" }
+        });
+
         res.render("admin/users/view", { users });
     } catch (error) {
         res.status(500).send("Error fetching users");
     }
 };
+
 
 export const userStatusChange = async (req, res) => {
     const { id } = req.params;
