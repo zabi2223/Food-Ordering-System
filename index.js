@@ -1,7 +1,7 @@
 import express from "express";
 import session from 'express-session';
-import user from "./routes/user.js";
-import admin from "./routes/admin.js";
+import user from "./routes/userRoute.js";
+import admin from "./routes/adminRoute.js";
 import connectToDB from "./db config/db.js";
 
 
@@ -14,7 +14,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
-  secret: 'Secret-Key',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
