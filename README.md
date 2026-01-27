@@ -35,7 +35,7 @@ Admins can manage products, users, and orders using full **CRUD (Create, Read, U
 | Backend        | Node.js, Express.js                                        |
 | Database       | MongoDB (Mongoose ORM)                                     |
 | Authentication | Express-Session / JWT (based on implementation)            |
-| Other Tools    | Nodemon, bcrypt (for password hashing)             |
+| Other Tools    | Nodemon, bcrypt (for password hashing)                     |
 
 ---
 
@@ -60,7 +60,7 @@ MONGO_URI=your_mongodb_connection_string
 SESSION_SECRET=your_secret_key
 
 # 5. Start the server
-npm start
+nodemon index.js
 ```
 
 Your app will run on **[http://localhost:3000](http://localhost:3000)**
@@ -97,11 +97,6 @@ Burger-King-WebApp/
 
 ---
 
-## 📸 Screenshots (Optional)
-
-*Add screenshots of your app here — e.g., homepage, admin panel, menu page.*
-
----
 
 ## 💡 Future Improvements
 
@@ -114,7 +109,7 @@ Burger-King-WebApp/
 ## 🧑‍💻 Author
 
 **Muhammad Zohaib Tariq**
-* 💼 *Full Stack Developer (MERN / EJS Stack)*
-* 📧 [zohaibtariq566@gmail.com]
-* 🌐 [www.linkedin.com/in/zohaib-tariq-meo]
+* 📧 [[zohaibtariq566@gmail.com](mailto:zohaibtariq566@gmail.com)]
+* 🌐 [[www.linkedin.com/in/zohaib-tariq-meo](http://www.linkedin.com/in/zohaib-tariq-meo)]
+* 🐱 [[https://github.com/zabi2223](https://github.com/zabi2223)]
 
